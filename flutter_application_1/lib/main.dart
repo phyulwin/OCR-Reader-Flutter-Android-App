@@ -1,10 +1,10 @@
 import 'dart:io';
-import 'package:image_picker/image_picker.dart'; //todo
-import './services/ocr_service.dart'; //todo
-
+import 'package:image_picker/image_picker.dart';
+import './services/ocr_service.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:clipboard/clipboard.dart';
 
 void main() {
   runApp(MyApp());
@@ -139,9 +139,25 @@ class GeneratorPage extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
+
                       title: Text('Scanned Text'),
                       content: SingleChildScrollView(child: Text(result)),
-                      actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
+                      actions: [
+                      // copy text option
+                      TextButton(
+                        onPressed: () {
+                          FlutterClipboard.copy(result).then((value) {ScaffoldMessenger.of(context).
+                          showSnackBar(SnackBar(content: Text('Text copied to clipboard')),);});
+                        },
+                        child: Text('Copy'),
+                      ),
+                      
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: Text('OK'),
+                      ),
+                    ],
+
                     ),
                   );
                 }
