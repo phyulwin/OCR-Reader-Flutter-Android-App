@@ -1,0 +1,8 @@
+{
+  "files": [
+    "eng.traineddata",
+    "jpn.traineddata",
+    "mya.traineddata",
+    "kor.traineddata"
+  ]
+}
