@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import './services/ocr_service.dart';
 import 'package:english_words/english_words.dart';
@@ -131,33 +130,31 @@ class GeneratorPage extends StatelessWidget {
           // this is for the image scanner
           ElevatedButton(
             onPressed: () async {
-              final picker = ImagePicker();
-              final image = await picker.pickImage(source: ImageSource.gallery);
-              if (image != null) {
-                String? result = await scanImage(image.path);
-                if (result != null) {
+              final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+              if (pickedFile != null) {
+                String? result = await scanImage(pickedFile.path);
+                if (result != null && result.isNotEmpty) {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-
                       title: Text('Scanned Text'),
                       content: SingleChildScrollView(child: Text(result)),
                       actions: [
-                      // copy text option
-                      TextButton(
-                        onPressed: () {
-                          FlutterClipboard.copy(result).then((value) {ScaffoldMessenger.of(context).
-                          showSnackBar(SnackBar(content: Text('Text copied to clipboard')),);});
-                        },
-                        child: Text('Copy'),
-                      ),
-                      
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: Text('OK'),
-                      ),
-                    ],
-
+                        TextButton(
+                          onPressed: () {
+                            FlutterClipboard.copy(result).then((_) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Copied to clipboard')),
+                              );
+                            });
+                          },
+                          child: Text('Copy'),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text('OK'),
+                        ),
+                      ],
                     ),
                   );
                 }
