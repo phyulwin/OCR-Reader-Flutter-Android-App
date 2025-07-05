@@ -7,8 +7,9 @@ PDF scanner or handwritten text scanner OCR from PDF/handwritten sources with su
 
 Live image text dectection not available.
 
-+ upload image
-+ take a picture
++ upload image (.jpg / .jpeg / .png / .webp)
++ take a picture (if there is no image ready to upload)
++ upload a document (pdf etc.) -> render to image for scanning 
 
 App scans the image that includes text or handwriting
 (supported language: english for now)
@@ -22,15 +23,13 @@ Stretch idea:
 + local file storage system
 Key:value -- scanned image + plain text document
 No cloud storage for privacy reasons. 
-
-Up to 30 free scans per day. Watch ad to gain +10 scans. 
 Delete files that are not needed. 
 
 # References & Tutorials 
 [Flutter OCR using Google ML Kit | Flutter Text Recognition 2024](https://youtu.be/GmhkXH8fO-A?si=9M3Zhn6mYM5RXiw4)
 [Google's ML Kit for Flutter](https://pub.dev/packages/google_ml_kit)
 
-[tesseract_ocr 0.5.0 ](https://pub.dev/packages/tesseract_ocr) --> using this one
+[tesseract_ocr 0.5.0 ](https://pub.dev/packages/tesseract_ocr) 
 
 [flutter_genius_scan 5.11.1](https://pub.dev/packages/flutter_genius_scan)
 needs to buy license key
