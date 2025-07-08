@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'generator_page.dart';
-import 'favorites_page.dart';
+import 'scan_history_page.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
         page = GeneratorPage();
         break;
       case 1:
-        page = FavoritesPage();
+        page = ScanHistoryPage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');

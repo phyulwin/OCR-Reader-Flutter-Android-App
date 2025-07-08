@@ -1,4 +1,6 @@
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:flutter_application_1/models/scanned_txt.dart';
+import 'package:flutter_application_1/services/local_storage.dart';
 
 Future<String?> scanImage(String imagePath) async {
   final inputImage = InputImage.fromFilePath(imagePath);
@@ -7,7 +9,18 @@ Future<String?> scanImage(String imagePath) async {
   try {
     final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
     await textRecognizer.close();
-    return recognizedText.text;
+
+    final String text = recognizedText.text;
+
+    if (text.isNotEmpty) {
+      final scanned = ScannedText(
+        text: text,
+        timestamp: DateTime.now(),
+      );
+      await LocalStorageService.saveEntry(scanned);
+    }
+
+    return text;
   } catch (e) {
     print('OCR failed: $e');
     return null;
